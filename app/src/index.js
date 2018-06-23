@@ -1,12 +1,23 @@
 import React from 'react'
-import {render} from  'react-dom'
+import { render } from 'react-dom'
 
-function HelloWorld(){
-    return(
-        <div>
-            <h1>Hello World</h1>
+function Article() {
+    const body = <section>body</section>;
+    return (
+        <div className="helo" style={{color:'red'}}>
+            <h1>Title</h1>
+            {body}// const body
+            <h3>creation date: {(new Date).toDateString()}</h3>
         </div>
     )
 }
 
-render(<HelloWorld/>,document.getElementById('root'))
+function App() {
+    return (
+        <div>
+            <h1>App Name</h1>
+            <Article/>
+        </div>
+    )
+}
+render(<App />, document.getElementById('root'))
