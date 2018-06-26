@@ -8,7 +8,7 @@ class Article extends PureComponent { //наследуем Article из Componen
 
 //defaultOpen будем передавать в статью
         this.state={
-            isOpen:props.defaultOpen,
+            //isOpen:props.defaultOpen,
             count:0
         }
 
@@ -32,25 +32,26 @@ componentWillMount(){
     console.log('---','mounting')
 }
 
-componentWillReceiveProps(nextProps){
-    console.log('---','componentWillReceiveProps')
-    if (nextProps.defaultOpen != this.props.defaultOpen) this.setState({
-        isOpen: nextProps.defaultOpen
-    })
-}
+//после выноса isOpen к родителю ArticleList, данный кусок больше не нужен
+// componentWillReceiveProps(nextProps){
+//     console.log('---','componentWillReceiveProps')
+//     if (nextProps.defaultOpen != this.props.defaultOpen) this.setState({
+//         isOpen: nextProps.defaultOpen
+//     })
+// }
 
 componentWillUpdate(nextProps){
     console.log('---','componentWillUpdate')
 
 }
     render() {
-
-        const {article} = this.props;
+//все isOpen теперь в пропсах
+        const {article, isOpen, onButtonCLick} = this.props;
     //console.log("---", this.props);
     //console.log("---", article);
 
         //this.state.isOpen && - проверка на начальное состояние isOpen и article.text
-    const body = this.state.isOpen && <section className="card-text">{article.text}</section>;//целая константа с объектом {article.text}
+    const body = isOpen && <section className="card-text">{article.text}</section>;//целая константа с объектом {article.text}
     
     return (//style={{width:'50%'}} - инлайновый стиль
         <div className="card mx-auto" style={{width:'50%'}}>
@@ -59,8 +60,8 @@ componentWillUpdate(nextProps){
                     {article.title}
                     click {this.state.count /*отображение колва кликов*/}
                     {/* <button onClick={handClick.bind(this)}>close</button> - это одна из возможностей проверять состояние кнопки */}
-                    <button className="btn btn-primary btn-lg float-right" onClick={this.handClick}>
-                        {this.state.isOpen? "close":"open"}
+                    <button className="btn btn-primary btn-lg float-right" onClick={onButtonCLick}>
+                        {isOpen? "close":"open"}
                     </button>
                 </h2>
             </div>
@@ -87,12 +88,12 @@ incrementCounter =() => {
 }
 
 
-handClick= () => {
-    //console.log("---","close:open");
-    this.setState({
-        isOpen: !this.state.isOpen //setState - это асинхронная апперация 
-    })
-}
+// handClick= () => {
+//     //console.log("---","close:open");
+//     this.setState({
+//         isOpen: !this.state.isOpen //setState - это асинхронная апперация 
+//     })
+// }
 
 }
 
