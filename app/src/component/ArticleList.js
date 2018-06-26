@@ -5,8 +5,11 @@ import './ArticleList.css'
 export default function ArticleList({articles}) {//в пропсах приходит массив статей articles
     
     //превращаем каждый объект articles в реактовский элемент
-    const articleElements = articles.map(article =>
-        <li className="article-list_li" key={article.id}><Article article={article}/></li>
+    //defaultOpen = {index===0} - все статьи закрыты кроме 1ой!
+    const articleElements = articles.map((article, index) =>
+        <li className="article-list_li" key={article.id}>
+            <Article article={article} defaultOpen = {index===0}/>
+        </li>
     )
     
     return(

@@ -3,22 +3,38 @@ import React, {Component} from 'react'
 class Article extends Component { //наследуем Article из Component
     
     //доюавление состояния
-    // constructor(props){
-    //     super(props)
+    constructor(props){
+        super(props)
 
-    //     this.state={
-    //         isOpen:false
-    //     }
+//defaultOpen будем передавать в статью
+        this.state={
+            isOpen:props.defaultOpen
+        }
 
     // this.handClick=handClick.bind(this)
 
-    // }
-    
- state={ //это аналог записиь через Constructor
-     isOpen:true
- }
+     }
+ 
+//  state={ //это аналог записиь через Constructor
+//      isOpen:true
+//  }
 
+//компонент жизненого цикла
+componentWillMount(){
+    console.log('---','mounting')
+}
 
+componentWillReceiveProps(nextProps){
+    console.log('---','componentWillReceiveProps')
+    if (nextProps.defaultOpen != this.props.defaultOpen) this.setState({
+        isOpen: nextProps.defaultOpen
+    })
+}
+
+componentWillUpdate(nextProps){
+    console.log('---','componentWillUpdate')
+
+}
     render() {
 
         const {article} = this.props;
