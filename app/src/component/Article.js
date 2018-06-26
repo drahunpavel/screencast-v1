@@ -46,7 +46,7 @@ componentWillUpdate(nextProps){
     render() {
 
         const {article} = this.props;
-    console.log("---", this.props);
+    //console.log("---", this.props);
     //console.log("---", article);
 
         //this.state.isOpen && - проверка на начальное состояние isOpen и article.text
@@ -57,7 +57,7 @@ componentWillUpdate(nextProps){
             <div className="card-header">
                 <h2 onClick={this.incrementCounter /*Добавляем кликер*/}>
                     {article.title}
-                    clicked {this.state.count /*отображение колва кликов*/}
+                    click {this.state.count /*отображение колва кликов*/}
                     {/* <button onClick={handClick.bind(this)}>close</button> - это одна из возможностей проверять состояние кнопки */}
                     <button className="btn btn-primary btn-lg float-right" onClick={this.handClick}>
                         {this.state.isOpen? "close":"open"}
@@ -88,7 +88,7 @@ incrementCounter =() => {
 
 
 handClick= () => {
-    console.log("---","close:open");
+    //console.log("---","close:open");
     this.setState({
         isOpen: !this.state.isOpen //setState - это асинхронная апперация 
     })
