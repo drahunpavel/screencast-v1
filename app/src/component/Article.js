@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 
-class Article extends Component { //наследуем Article из Component
+class Article extends PureComponent { //наследуем Article из Component
     
     //доюавление состояния
     constructor(props){
@@ -8,7 +8,8 @@ class Article extends Component { //наследуем Article из Component
 
 //defaultOpen будем передавать в статью
         this.state={
-            isOpen:props.defaultOpen
+            isOpen:props.defaultOpen,
+            count:0
         }
 
     // this.handClick=handClick.bind(this)
@@ -18,6 +19,13 @@ class Article extends Component { //наследуем Article из Component
 //  state={ //это аналог записиь через Constructor
 //      isOpen:true
 //  }
+
+
+// shouldComponentUpdate(nextProps,nextState){
+//     return this.state.isOpen !==nextState.isOpen //проверяет на измение кнопки isOpen
+// }
+//Есть PureComponent, поэтому shouldComponentUpdate не нужно реализовывать вручную. А он уже првоеряет все nextProps,nextState 
+
 
 //компонент жизненого цикла
 componentWillMount(){
@@ -47,8 +55,9 @@ componentWillUpdate(nextProps){
     return (//style={{width:'50%'}} - инлайновый стиль
         <div className="card mx-auto" style={{width:'50%'}}>
             <div className="card-header">
-                <h2>
+                <h2 onClick={this.incrementCounter /*Добавляем кликер*/}>
                     {article.title}
+                    clicked {this.state.count /*отображение колва кликов*/}
                     {/* <button onClick={handClick.bind(this)}>close</button> - это одна из возможностей проверять состояние кнопки */}
                     <button className="btn btn-primary btn-lg float-right" onClick={this.handClick}>
                         {this.state.isOpen? "close":"open"}
@@ -71,6 +80,13 @@ componentWillUpdate(nextProps){
 //     //меняем состояние isOpen с помощью setstate
 //     console.log("---","clicked");
 // }
+incrementCounter =() => {
+    this.setState({
+        count: this.state.count +1
+    })
+}
+
+
 handClick= () => {
     console.log("---","close:open");
     this.setState({
