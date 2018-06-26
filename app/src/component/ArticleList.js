@@ -1,11 +1,12 @@
 import React from 'react'
 import Article from './Article'
+import './ArticleList.css'
 
 export default function ArticleList({articles}) {//в пропсах приходит массив статей articles
     
     //превращаем каждый объект articles в реактовский элемент
     const articleElements = articles.map(article =>
-        <li key={article.id}><Article article={article}/></li>
+        <li className="article-list_li" key={article.id}><Article article={article}/></li>
     )
     
     return(

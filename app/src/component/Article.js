@@ -26,20 +26,26 @@ class Article extends Component { //наследуем Article из Component
     //console.log("---", article);
 
         //this.state.isOpen && - проверка на начальное состояние isOpen и article.text
-    const body = this.state.isOpen && <section>{article.text}</section>;//целая константа с объектом {article.text}
+    const body = this.state.isOpen && <section className="card-text">{article.text}</section>;//целая константа с объектом {article.text}
     
-    return (
-        <div className="helo" style={{color:'blue'}}>
-            <h1>
-                {article.title}
-                {/* <button onClick={handClick.bind(this)}>close</button> - это одна из возможностей проверять состояние кнопки */}
-                <button onClick={this.handClick}>
-                    {this.state.isOpen? "close":"open"}
-                </button>
-            </h1>
-            {body// const body
-            }
-            <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+    return (//style={{width:'50%'}} - инлайновый стиль
+        <div className="card mx-auto" style={{width:'50%'}}>
+            <div className="card-header">
+                <h2>
+                    {article.title}
+                    {/* <button onClick={handClick.bind(this)}>close</button> - это одна из возможностей проверять состояние кнопки */}
+                    <button className="btn btn-primary btn-lg float-right" onClick={this.handClick}>
+                        {this.state.isOpen? "close":"open"}
+                    </button>
+                </h2>
+            </div>
+
+            <div className="card-body">
+                <h6 className="card-subtitle-muted">creation date: {(new Date(article.date)).toDateString()}</h6>
+                {
+                    body// const body
+                }
+            </div>
         </div>
     )
     }
